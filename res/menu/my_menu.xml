@@ -1,0 +1,9 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+    <item android:id="@+id/menu_settings" android:orderInCategory="100"   
+    android:showAsAction="never" android:title="SETTINGS"/>
+    <item android:id="@+id/itemInicio" android:title="INICIO"></item>
+    <item android:id="@+id/itemBusquedaCategorias" android:title="BUSQUEDA POR CATEGORIAS"></item>
+    <item android:id="@+id/itemMisBusquedas" android:title="MIS BUSQUEDAS"></item>
+    <item android:id="@+id/itemIngresa" android:title="INGRESA"></item>
+    <item android:id="@+id/itemCerrarSesion" android:title="CERRAR SESIÓN"></item>
+</menu>

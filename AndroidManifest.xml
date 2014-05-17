@@ -34,6 +34,10 @@
 	       android:name=".NotificationReceiverActivity"
 	       android:label="APP-SOCIAL|Contenido Full" >
 	    </activity>
+	    <activity
+	       android:name=".ActividadListCategory"
+	       android:label="APP-SOCIAL|Categorias Actividades" >
+	    </activity>
     </application>
 
 </manifest>

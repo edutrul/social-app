@@ -12,6 +12,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
@@ -30,6 +33,9 @@ public class ListActividadesActivity extends Activity {
 	private EditText filterText = null;
 	public final static String URI = "http://hacks.lalotech.com/ws/actividades.json";
 	public final static String ACTIVIDAD_NID = "com.inkaap.appsocial.gui.ACTIVIDAD_NID";
+	public final static String ACTIVIDAD_TID = "com.inkaap.appsocial.gui.ACTIVIDAD_TID";
+	public final static String ACTIVIDAD_TID_NOMBRE = "com.inkaap.appsocial.gui.ACTIVIDAD_TID_NOMBRE";
+	
 	public final static String ORGANIZACION_UID = "com.inkaap.appsocial.gui.ACTIVIDAD_UID";
 	public final static String ORGANIZACION_NOMBRE = "com.inkaap.appsocial.gui.ACTIVIDAD_NOMBRE";
 	@Override
@@ -38,8 +44,12 @@ public class ListActividadesActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_list_actividades);
 		String jsonResponse = "";
+		
 		String organizacionUID = getIntent().getStringExtra(ORGANIZACION_UID);
 		String organizacionNombre = getIntent().getStringExtra(ORGANIZACION_NOMBRE);
+		String actividadTID = getIntent().getStringExtra(ACTIVIDAD_TID);
+		String actividadTIDNombre = getIntent().getStringExtra(ACTIVIDAD_TID_NOMBRE);
+		
 		filterText = (EditText) findViewById(R.id.search_box);
 
 		
@@ -52,6 +62,11 @@ public class ListActividadesActivity extends Activity {
 			setTitle("Organizador: " + organizacionNombre);
 			filterText.setHint("ORGANIZACION: " + organizacionNombre.toUpperCase());
 			jsonResponse = HttpHelper.connect(URI + "?uid=" + organizacionUID);
+		}
+		else if (actividadTID != null) {
+			setTitle("CATEGORIA: " + actividadTIDNombre);
+			filterText.setHint("ORGANIZACION: " + actividadTIDNombre.toUpperCase());
+			jsonResponse = HttpHelper.connect(URI + "?tid=" + actividadTID);
 		}
 		else {
 			jsonResponse = HttpHelper.connect(URI);
@@ -135,4 +150,28 @@ public class ListActividadesActivity extends Activity {
 	    filterText.removeTextChangedListener(filterTextWatcher);
 	}
 	
+	public boolean onCreateOptionsMenu(Menu menu) {
+        
+	    MenuInflater inflater = getMenuInflater();
+	    inflater.inflate(R.menu.my_menu, menu);
+	    return true;
+	}
+	
+	 /**
+     * Event Handling for Individual menu item selected
+     * Identify single menu item by it's id
+     * */
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+	    switch (item.getItemId()) {
+    	case R.id.itemInicio:
+    		startActivity(new Intent(this, ListActividadesActivity.class));
+    		return true;
+    	case R.id.itemBusquedaCategorias:
+    		startActivity(new Intent(this, ActividadListCategory.class));
+    		return true;
+    	default:
+    		return super.onOptionsItemSelected(item);
+       }
+    }
 }

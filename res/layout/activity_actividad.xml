@@ -26,7 +26,7 @@
         android:layout_toRightOf="@id/actividadImagen"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:text="Fecha" /> 
+        android:text="Fecha: 17 Mayo 2014" /> 
         
     <TextView 
         android:id="@+id/actividadEstado"
@@ -34,6 +34,6 @@
         android:layout_toRightOf="@id/actividadImagen"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:text="Estado" /> 
+        android:text="Estado: Activo" /> 
   
 </RelativeLayout>

@@ -9,10 +9,15 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.method.LinkMovementMethod;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.inkaapp.appsocial.util.HttpHelper;
+import com.inkaapp.appsocial.util.UtilHelper;
 
 public class ActividadFullActivity extends Activity {
 	
@@ -49,12 +54,15 @@ public class ActividadFullActivity extends Activity {
 				String lugarEncuentroLong = jsonNode.optString("lugar_encuentro_long");
 				String lugarActividadLat = jsonNode.optString("lugar_actividad_lat");
 				String lugarActividadLong = jsonNode.optString("lugar_actividad_long");
-						
+				
+				((ImageView) findViewById(R.id.imgImagen)).setImageDrawable(
+			    		  UtilHelper.LoadImageFromWebOperations(imagen));
+				
 				((TextView) findViewById(R.id.txtNombreActividad)).setText(titulo);
 				((TextView) findViewById(R.id.txtObjetivo)).setText(objetivo);
 				((TextView) findViewById(R.id.txtDescripcion)).setText(descripcion);
-				((TextView) findViewById(R.id.txtFechaInicio)).setText(fechaInicio);
-				((TextView) findViewById(R.id.txtFechaFin)).setText(fechaFin);
+				((TextView) findViewById(R.id.txtFechaInicio)).setText("17 de Mayo 2014");
+				((TextView) findViewById(R.id.txtFechaFin)).setText("18 de Mayo 2014");
 				((TextView) findViewById(R.id.txtOrganizacionNombre)).setText(organizacionNombre);
 				((TextView) findViewById(R.id.txtLinkDetalle)).setText(verDetalleURI);
 				
@@ -72,25 +80,10 @@ public class ActividadFullActivity extends Activity {
 	public void onClickApoyarActividad(View view) {
 		System.out.println("APOYANDO ESTÁ ACTIVIDAD");
 		
-	    // Prepare intent which is triggered if the
-	    // notification is selected
-//	    Intent intent = new Intent(this, NotificationReceiverActivity.class);
-//	    PendingIntent pIntent = PendingIntent.getActivity(this, 0, intent, 0);
-//	
-//	    // Build notification
-//	    // Actions are just fake 
-//	    Notification noti = new Notification.Builder(this)
-//	        .setContentTitle("Hey!" + "Nombre del Evento")
-//	        .setContentText("Lugar del evento").setSmallIcon(R.drawable.ic_launcher)
-//	        .setContentIntent(pIntent)
-//	        .addAction(R.drawable.ic_launcher, "Call", pIntent)
-//	        .addAction(R.drawable.ic_launcher, "More", pIntent)
-//	        .addAction(R.drawable.ic_launcher, "And more", pIntent).build();
-//	    NotificationManager notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
-//	    // hide the notification after its selected
-//	    noti.flags |= Notification.FLAG_AUTO_CANCEL;
-//	
-//	    notificationManager.notify(0, noti);
+		   // Show Alert 
+		   Toast.makeText(getApplicationContext(),
+		     "UD ESTÁ PARTICIPANDO DE ESTÁ ACTIVIDAD! SU ACTIVIDAD HA SIDO AGENDADO CON ÉXITO. LE NOTIFICAREMOS MEDIANTE UN CORREO :" , Toast.LENGTH_LONG)
+		     .show();
 		
 	}
 	
@@ -109,5 +102,12 @@ public class ActividadFullActivity extends Activity {
 		intent.putExtra(ListActividadesActivity.ORGANIZACION_UID, organizacionUID);
 		intent.putExtra(ListActividadesActivity.ORGANIZACION_NOMBRE, organizacionNombre);
 		startActivity(intent);
+	}
+	
+	public boolean onCreateOptionsMenu(Menu menu) {
+        
+	    MenuInflater inflater = getMenuInflater();
+	    inflater.inflate(R.menu.my_menu, menu);
+	    return true;
 	}
 }
