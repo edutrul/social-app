@@ -30,26 +30,34 @@ public class ListActividadesActivity extends Activity {
 	private EditText filterText = null;
 	public final static String URI = "http://hacks.lalotech.com/ws/actividades.json";
 	public final static String ACTIVIDAD_NID = "com.inkaap.appsocial.gui.ACTIVIDAD_NID";
+	public final static String ORGANIZACION_UID = "com.inkaap.appsocial.gui.ACTIVIDAD_UID";
+	public final static String ORGANIZACION_NOMBRE = "com.inkaap.appsocial.gui.ACTIVIDAD_NOMBRE";
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_list_actividades);
-		
+		String jsonResponse = "";
+		String organizacionUID = getIntent().getStringExtra(ORGANIZACION_UID);
+		String organizacionNombre = getIntent().getStringExtra(ORGANIZACION_NOMBRE);
 		filterText = (EditText) findViewById(R.id.search_box);
+
+		
 	    filterText.addTextChangedListener(filterTextWatcher);
 		
-
-	    
-	    
 		List<Actividad> actividades =
 		           new ArrayList<Actividad>();
 		
-
-	    
-//		System.out.println(URI);
-		String jsonResponse = HttpHelper.connect(URI);
-//		System.out.println(jsonResponse);
+//		if (organizacionUID != null) {
+//			setTitle("Organizador: " + organizacionNombre);
+//			filterText.setHint("ORGANIZACION: " + organizacionNombre.toUpperCase());
+//			jsonResponse = HttpHelper.connect(URI + "?uid=" + organizacionUID);
+//		}
+//		else {
+//			jsonResponse = HttpHelper.connect(URI);
+//		}
+		jsonResponse = HttpHelper.connect(URI);
+		
 	    try {
 			JSONArray joArray = new JSONArray(jsonResponse);
 			for (int i = 0; i < joArray.length(); i++) {
@@ -57,9 +65,10 @@ public class ListActividadesActivity extends Activity {
 				String titulo = jsonNode.optString("node_title");
 				String nid = jsonNode.optString("nid");
 				String imagen = jsonNode.optString("imagen");
+				String uid = jsonNode.optString("uid");
 				actividades.add(new Actividad(nid, titulo, imagen, "descripcion", "Objetivo", 
 						151051515, -12151510, 150151554, -245465464, 
-						1400202469, 1400202476, new Organizacion("org a", "org desc a", "image a")));
+						1400202469, 1400202476, new Organizacion(uid, "org a", "org desc a", "image a")));
 			}
 		} catch (JSONException e) {
 			// TODO Auto-generated catch block

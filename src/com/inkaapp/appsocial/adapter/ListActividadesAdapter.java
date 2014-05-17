@@ -2,7 +2,9 @@ package com.inkaapp.appsocial.adapter;
 
 import java.io.InputStream;
 import java.net.URL;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
@@ -65,7 +67,11 @@ public class ListActividadesAdapter extends BaseAdapter implements Filterable {
 
       Actividad actividad = (Actividad) getItem(position);
       contenedor.actividadNombre.setText(actividad.getTitulo());
-      contenedor.actividadFecha.setText(actividad.getFechaInicio() + "" + actividad.getFechaFin());
+//      String fechaInicio = new SimpleDateFormat("yyyy-MM-dd").format(
+//    		  new Date(actividad.getFechaInicio() * 1000));
+//      String fechaFin = new SimpleDateFormat("yyyy-MM-dd").format(
+//    		  new Date(actividad.getFechaInicio() * 1000));
+      contenedor.actividadFecha.setText("" + "" + "");
       
       
 //      String imageBaseDirectory = "http://www.dha.com.tr/newpics/news/";

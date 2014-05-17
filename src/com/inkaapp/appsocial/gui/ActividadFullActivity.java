@@ -15,7 +15,10 @@ import android.widget.TextView;
 import com.inkaapp.appsocial.util.HttpHelper;
 
 public class ActividadFullActivity extends Activity {
-
+	
+	public String organizacionUID;
+	public String organizacionNombre;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
@@ -27,9 +30,6 @@ public class ActividadFullActivity extends Activity {
 	
 	public void fillData() {
 		String nid = getIntent().getStringExtra(ListActividadesActivity.ACTIVIDAD_NID);
-		Log.d("NID", nid);
-		System.out.println(nid);
-		System.out.println(getIntent().getIntExtra(ListActividadesActivity.ACTIVIDAD_NID, 1));
 		String jsonResponse = HttpHelper.connect(ListActividadesActivity.URI + "?nid=" + nid);
 	    try {
 			JSONArray joArray = new JSONArray(jsonResponse);
@@ -41,7 +41,8 @@ public class ActividadFullActivity extends Activity {
 				String descripcion = jsonNode.optString("descripcion");
 				String fechaInicio = jsonNode.optString("objetivo");
 				String fechaFin = jsonNode.optString("objetivo");
-				String organizacionNombre = jsonNode.optString("organizacion");
+				organizacionNombre = jsonNode.optString("organizacion");
+			    organizacionUID = jsonNode.optString("uid");
 				String verDetalleURI = jsonNode.optString("ver_detalle");
 				
 				String lugarEncuentroLat = jsonNode.optString("lugar_encuentro_lat");
@@ -101,5 +102,12 @@ public class ActividadFullActivity extends Activity {
 		    sharingIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, "Subject Here");
 		    sharingIntent.putExtra(android.content.Intent.EXTRA_TEXT, shareBody);
 		startActivity(Intent.createChooser(sharingIntent, "Share via"));
+	}
+	
+	public void onClickMasActividades(View view) {
+		Intent intent = new Intent(getApplicationContext(), ListActividadesActivity.class);
+		intent.putExtra(ListActividadesActivity.ORGANIZACION_UID, organizacionUID);
+		intent.putExtra(ListActividadesActivity.ORGANIZACION_NOMBRE, organizacionUID);
+		startActivity(intent);
 	}
 }

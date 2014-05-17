@@ -127,6 +127,12 @@
             android:id="@+id/txtOrganizacionNombre"
         	android:layout_width="wrap_content"
         	android:layout_height="wrap_content"/>
+    <Button 
+            android:id="@+id/btnMasActividades"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="+ ACTIVIDADES"
+            android:onClick="onClickMasActividades"/>
     </LinearLayout>
     
     <!-- VER MÁS DETALLE DEL EVENTO: -->

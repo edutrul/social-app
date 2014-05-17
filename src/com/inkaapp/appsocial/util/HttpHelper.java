@@ -42,6 +42,7 @@ public class HttpHelper {
     }
     public static String connect(String url)
     {
+    	
         HttpClient httpclient = new DefaultHttpClient();
         HttpGet httpget = new HttpGet(url); 
         HttpResponse response;
@@ -53,6 +54,7 @@ public class HttpHelper {
                 InputStream instream = entity.getContent();
                 String result= convertStreamToString(instream);
                 instream.close();
+                System.out.println(instream);
                 return result;
             }
         } catch (ClientProtocolException e) {
