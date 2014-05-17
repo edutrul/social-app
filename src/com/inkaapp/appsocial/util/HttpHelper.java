@@ -23,7 +23,6 @@ public class HttpHelper {
          */
         BufferedReader reader = new BufferedReader(new InputStreamReader(is));
         StringBuilder sb = new StringBuilder();
-
         String line = null;
         try {
             while ((line = reader.readLine()) != null) {

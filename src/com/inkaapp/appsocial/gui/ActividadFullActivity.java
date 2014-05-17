@@ -107,7 +107,7 @@ public class ActividadFullActivity extends Activity {
 	public void onClickMasActividades(View view) {
 		Intent intent = new Intent(getApplicationContext(), ListActividadesActivity.class);
 		intent.putExtra(ListActividadesActivity.ORGANIZACION_UID, organizacionUID);
-		intent.putExtra(ListActividadesActivity.ORGANIZACION_NOMBRE, organizacionUID);
+		intent.putExtra(ListActividadesActivity.ORGANIZACION_NOMBRE, organizacionNombre);
 		startActivity(intent);
 	}
 }

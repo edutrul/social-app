@@ -48,15 +48,14 @@ public class ListActividadesActivity extends Activity {
 		List<Actividad> actividades =
 		           new ArrayList<Actividad>();
 		
-//		if (organizacionUID != null) {
-//			setTitle("Organizador: " + organizacionNombre);
-//			filterText.setHint("ORGANIZACION: " + organizacionNombre.toUpperCase());
-//			jsonResponse = HttpHelper.connect(URI + "?uid=" + organizacionUID);
-//		}
-//		else {
-//			jsonResponse = HttpHelper.connect(URI);
-//		}
-		jsonResponse = HttpHelper.connect(URI);
+		if (organizacionUID != null) {
+			setTitle("Organizador: " + organizacionNombre);
+			filterText.setHint("ORGANIZACION: " + organizacionNombre.toUpperCase());
+			jsonResponse = HttpHelper.connect(URI + "?uid=" + organizacionUID);
+		}
+		else {
+			jsonResponse = HttpHelper.connect(URI);
+		}
 		
 	    try {
 			JSONArray joArray = new JSONArray(jsonResponse);
