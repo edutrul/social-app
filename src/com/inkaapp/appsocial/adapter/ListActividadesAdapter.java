@@ -1,15 +1,15 @@
 package com.inkaapp.appsocial.adapter;
 
 import java.io.InputStream;
-import java.net.URL;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
 import android.content.Context;
-import android.graphics.drawable.Drawable;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.os.AsyncTask;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,7 +21,6 @@ import android.widget.TextView;
 
 import com.inkaapp.appsocial.bean.Actividad;
 import com.inkaapp.appsocial.gui.R;
-import com.inkaapp.appsocial.util.UtilHelper;
 
 public class ListActividadesAdapter extends BaseAdapter implements Filterable {
 
@@ -67,21 +66,43 @@ public class ListActividadesAdapter extends BaseAdapter implements Filterable {
 
       Actividad actividad = (Actividad) getItem(position);
       contenedor.actividadNombre.setText(actividad.getTitulo());
-//      String fechaInicio = new SimpleDateFormat("yyyy-MM-dd").format(
-//    		  new Date(actividad.getFechaInicio() * 1000));
-//      String fechaFin = new SimpleDateFormat("yyyy-MM-dd").format(
-//    		  new Date(actividad.getFechaInicio() * 1000));
       contenedor.actividadFecha.setText("" + "" + "");
       
+//      contenedor.actividadImagen.setImageDrawable(
+//    		  UtilHelper.LoadImageFromWebOperations(actividad.getImage()));
       
-//      String imageBaseDirectory = "http://www.dha.com.tr/newpics/news/";
-//      String imageName = "230620111119295717933.jpg";//get image name from json parsing;
-//      contenedor.actividadImagen.setImageURI(null);
-//      contenedor.actividadImagen.setImageURI(Uri.parse("http://www.dha.com.tr/newpics/news/230620111119295717933.jpg"));
-      contenedor.actividadImagen.setImageDrawable(
-    		  UtilHelper.LoadImageFromWebOperations(actividad.getImage()));
+       contenedor.actividadImagen.setTag(actividad.getImage());
+	   // show The Image
+	   new DownloadImageTask(contenedor.actividadImagen).execute();
+	      
       return convertView;
    }
+   
+
+class DownloadImageTask extends AsyncTask<Void, Void, Bitmap> {
+    ImageView bmImage;
+
+    public DownloadImageTask(ImageView bmImage) {
+        this.bmImage = bmImage;
+    }
+
+    protected Bitmap doInBackground(Void... voids) {
+        String urldisplay = (String) bmImage.getTag();
+        Bitmap mIcon11 = null;
+        try {
+            InputStream in = new java.net.URL(urldisplay).openStream();
+            mIcon11 = BitmapFactory.decodeStream(in);
+        } catch (Exception e) {
+            Log.e("Error", e.getMessage());
+            e.printStackTrace();
+        }
+        return mIcon11;
+    }
+    
+    protected void onPostExecute(Bitmap result) {
+        bmImage.setImageBitmap(result);
+    }
+}
    
    class ContenedorView {
 	  ImageView actividadImagen;
