@@ -21,6 +21,7 @@ import android.widget.TextView;
 
 import com.inkaapp.appsocial.bean.Actividad;
 import com.inkaapp.appsocial.gui.R;
+import com.squareup.picasso.Picasso;
 
 public class ListActividadesAdapter extends BaseAdapter implements Filterable {
 
@@ -28,11 +29,12 @@ public class ListActividadesAdapter extends BaseAdapter implements Filterable {
    private LayoutInflater lInflater;
    
    private List<Actividad> filteredData;
-   
+   private Context context;
    private ValueFilter valueFilter;
    
    public ListActividadesAdapter(Context context, List<Actividad> actividades) {
       this.lInflater = LayoutInflater.from(context);
+      this.context = context;
       this.actividades = actividades;
       
       this.filteredData = actividades;
@@ -67,42 +69,11 @@ public class ListActividadesAdapter extends BaseAdapter implements Filterable {
       Actividad actividad = (Actividad) getItem(position);
       contenedor.actividadNombre.setText(actividad.getTitulo());
       contenedor.actividadFecha.setText("" + "" + "");
-      
-//      contenedor.actividadImagen.setImageDrawable(
-//    		  UtilHelper.LoadImageFromWebOperations(actividad.getImage()));
-      
-       contenedor.actividadImagen.setTag(actividad.getImage());
-	   // show The Image
-	   new DownloadImageTask(contenedor.actividadImagen).execute();
+
+      Picasso.with(context).load(actividad.getImage()).into(contenedor.actividadImagen);
 	      
       return convertView;
    }
-   
-
-class DownloadImageTask extends AsyncTask<Void, Void, Bitmap> {
-    ImageView bmImage;
-
-    public DownloadImageTask(ImageView bmImage) {
-        this.bmImage = bmImage;
-    }
-
-    protected Bitmap doInBackground(Void... voids) {
-        String urldisplay = (String) bmImage.getTag();
-        Bitmap mIcon11 = null;
-        try {
-            InputStream in = new java.net.URL(urldisplay).openStream();
-            mIcon11 = BitmapFactory.decodeStream(in);
-        } catch (Exception e) {
-            Log.e("Error", e.getMessage());
-            e.printStackTrace();
-        }
-        return mIcon11;
-    }
-    
-    protected void onPostExecute(Bitmap result) {
-        bmImage.setImageBitmap(result);
-    }
-}
    
    class ContenedorView {
 	  ImageView actividadImagen;

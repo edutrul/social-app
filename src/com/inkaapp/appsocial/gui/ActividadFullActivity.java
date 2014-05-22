@@ -18,6 +18,7 @@ import android.widget.Toast;
 
 import com.inkaapp.appsocial.util.HttpHelper;
 import com.inkaapp.appsocial.util.UtilHelper;
+import com.squareup.picasso.Picasso;
 
 public class ActividadFullActivity extends Activity {
 	
@@ -40,7 +41,7 @@ public class ActividadFullActivity extends Activity {
 			JSONArray joArray = new JSONArray(jsonResponse);
 			for (int i = 0; i < joArray.length(); i++) {
 				JSONObject jsonNode = joArray.getJSONObject(i);
-				String imagen = jsonNode.optString("imagen");
+				String imagenURL = jsonNode.optString("imagen");
 				String titulo = jsonNode.optString("node_title");
 				String objetivo = jsonNode.optString("objetivo");
 				String descripcion = jsonNode.optString("descripcion");
@@ -55,8 +56,7 @@ public class ActividadFullActivity extends Activity {
 				String lugarActividadLat = jsonNode.optString("lugar_actividad_lat");
 				String lugarActividadLong = jsonNode.optString("lugar_actividad_long");
 				
-				((ImageView) findViewById(R.id.imgImagen)).setImageDrawable(
-			    		  UtilHelper.LoadImageFromWebOperations(imagen));
+				Picasso.with(getApplicationContext()).load(imagenURL).into((ImageView) findViewById(R.id.imgImagen));
 				
 				((TextView) findViewById(R.id.txtNombreActividad)).setText(titulo);
 				((TextView) findViewById(R.id.txtObjetivo)).setText(objetivo);
