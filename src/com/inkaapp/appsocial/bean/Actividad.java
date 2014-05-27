@@ -1,31 +1,53 @@
 package com.inkaapp.appsocial.bean;
 
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
+
+
 public class Actividad {
+	@Expose
 	public String nid;
+	@Expose
+	public String uid;
+	@Expose
 	private String titulo;
-	private String image;
+	@Expose
+	private String imagen;
+	@Expose
 	private String descripcion;
+	@Expose
 	private String objetivo;
+	@Expose
 	private double lugarEncuentroLat;
+	@Expose
 	private double lugarEncuentrolong;
+	@Expose
 	private double lugarActividadLat;
+	@Expose
 	private double lugarActividadlong;
+	
+	@SerializedName("views_php_15")
+	@Expose
 	private long fechaInicio;
+	@SerializedName("views_php_16")
+	@Expose
 	private long fechaFin;
+	@Expose
 	private Organizacion organizacion;
 	
 	public Actividad() {
 		super();
 	}
 	
-	public Actividad(String nid, String titulo, String image, String descripcion,
+	public Actividad(String nid, String uid, String titulo, String image, String descripcion,
 			String objetivo, double lugarEncuentroLat,
 			double lugarEncuentrolong, double lugarActividadLat,
 			double lugarActividadlong, long fechaInicio, long fechaFin, Organizacion organizacion) {
 		super();
 		this.nid = nid;
+		this.uid = uid;
 		this.titulo = titulo;
-		this.image = image;
+		this.imagen = image;
 		this.descripcion = descripcion;
 		this.objetivo = objetivo;
 		this.lugarEncuentroLat = lugarEncuentroLat;
@@ -45,6 +67,15 @@ public class Actividad {
 		return nid;
 	}
 	
+	
+	public String getUid() {
+		return uid;
+	}
+
+	public void setUid(String uid) {
+		this.uid = uid;
+	}
+
 	public String getTitulo() {
 		return titulo;
 	}
@@ -54,11 +85,11 @@ public class Actividad {
 	}
 
 	public String getImage() {
-		return image;
+		return imagen;
 	}
 
-	public void setImage(String image) {
-		this.image = image;
+	public void setImage(String imagen) {
+		this.imagen = imagen;
 	}
 
 	public String getDescripcion() {
@@ -131,6 +162,25 @@ public class Actividad {
 
 	public void setOrganizacion(Organizacion organizacion) {
 		this.organizacion = organizacion;
+	}
+	
+	@Override
+	public String toString() {
+		// TODO Auto-generated method stub
+		return "nid: " + nid +
+		        "uid: " + uid +
+				"titulo: " + titulo + 
+				"imagen: " + imagen +
+				"descripcion: " + descripcion +
+				"objetivo: " + objetivo + 
+				"lugarActividadLat: " + lugarActividadLat +
+				"lugarActividadlong: " + lugarActividadlong +
+				"lugarEncuentroLat: " + lugarEncuentroLat +
+				"lugarEncuentrolong: " + lugarEncuentrolong +
+				"fechaInicio: " + fechaInicio +
+				"fechaFin: " + fechaFin +
+		        "organizacion.getTitulo(): " + organizacion.getTitulo() +
+		        "organizacion.getDescripcion(): " + organizacion.getDescripcion();
 	}
 	
 	

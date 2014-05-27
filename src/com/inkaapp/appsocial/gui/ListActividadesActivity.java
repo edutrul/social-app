@@ -1,11 +1,8 @@
 package com.inkaapp.appsocial.gui;
 
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -22,10 +19,12 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.reflect.TypeToken;
 import com.inkaapp.appsocial.adapter.ListActividadesAdapter;
 import com.inkaapp.appsocial.bean.Actividad;
-import com.inkaapp.appsocial.bean.Organizacion;
-import com.inkaapp.appsocial.util.HttpHelper;
+import com.inkaapp.appsocial.util.HttpRequest;
 
 public class ListActividadesActivity extends Activity {
 	ListActividadesAdapter adapter = null;
@@ -52,7 +51,6 @@ public class ListActividadesActivity extends Activity {
 		
 		filterText = (EditText) findViewById(R.id.search_box);
 
-		
 	    filterText.addTextChangedListener(filterTextWatcher);
 		
 		List<Actividad> actividades =
@@ -61,38 +59,24 @@ public class ListActividadesActivity extends Activity {
 		if (organizacionUID != null) {
 			setTitle("Organizador: " + organizacionNombre);
 			filterText.setHint("ORGANIZACION: " + organizacionNombre.toUpperCase());
-			jsonResponse = HttpHelper.connect(URI + "?uid=" + organizacionUID);
+			jsonResponse = HttpRequest.get(URI + "?uid=" + organizacionUID).body();
 		}
 		else if (actividadTID != null) {
 			setTitle("CATEGORIA: " + actividadTIDNombre);
 			filterText.setHint("ORGANIZACION: " + actividadTIDNombre.toUpperCase());
-			jsonResponse = HttpHelper.connect(URI + "?tid=" + actividadTID);
+			jsonResponse = HttpRequest.get(URI + "?tid=" + actividadTID).body();
 		}
 		else {
-			jsonResponse = HttpHelper.connect(URI);
+			// TODO: Instead of having a HttpHelp class use the library http://loopj.com/android-async-http/
+			System.out.println("Hola mundo");
+			jsonResponse = HttpRequest.get(URI).body();
 		}
 		
-	    try {
-			JSONArray joArray = new JSONArray(jsonResponse);
-			for (int i = 0; i < joArray.length(); i++) {
-				JSONObject jsonNode = joArray.getJSONObject(i);
-				String titulo = jsonNode.optString("node_title");
-				String nid = jsonNode.optString("nid");
-				String imagen = jsonNode.optString("imagen");
-				String uid = jsonNode.optString("uid");
-				actividades.add(new Actividad(nid, titulo, imagen, "descripcion", "Objetivo", 
-						151051515, -12151510, 150151554, -245465464, 
-						1400202469, 1400202476, new Organizacion(uid, "org a", "org desc a", "image a")));
-			}
-		} catch (JSONException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	    
-//		actividades.add(new Actividad("title 2", "test 3", "descripcion", "Objetivo", 
-//				151051515, -12151510, 150151554, -245465464, 
-//				1400202469, 1400202476, new Organizacion("org b", "org desc b", "image b")));
-		
+		// MATCH JSON TO BEAN CLASSES.
+		Type listType = new TypeToken<List<Actividad>>(){}.getType();
+		Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
+        actividades = gson.fromJson(jsonResponse, listType);
+        
 		adapter = new ListActividadesAdapter(
 				ListActividadesActivity.this, actividades);
 		
