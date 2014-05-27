@@ -1,6 +1,7 @@
 package com.inkaapp.appsocial.bean;
 
 import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
 
 
 public class Organizacion {
@@ -8,13 +9,17 @@ public class Organizacion {
 	private String titulo;
 	@Expose
 	private String descripcion;
-	private String image;
+	@Expose
+	private String nid;
+	@Expose
+	private String imagen;
 	
-	public Organizacion(String titulo, String descripcion, String image) {
+	public Organizacion(String nid, String titulo, String descripcion, String imagen) {
 		super();
+		this.nid = nid;
 		this.titulo = titulo;
 		this.descripcion = descripcion;
-		this.image = image;
+		this.imagen = imagen;
 	}
 	
 	public String getTitulo() {
@@ -29,12 +34,24 @@ public class Organizacion {
 	public void setDescripcion(String descripcion) {
 		this.descripcion = descripcion;
 	}
-	public String getImage() {
-		return image;
+	public String getImagen() {
+		return imagen;
 	}
-	public void setImage(String image) {
-		this.image = image;
+	public void setImagen(String imagen) {
+		this.imagen = imagen;
+	}
+	public String getNid() {
+		return nid;
+	}
+	public void setNid(String nid) {
+		this.nid = nid;
 	}
 	
-	
+	@Override
+	public String toString() {
+		// TODO Auto-generated method stub
+		return "nid: " + nid +
+				"titulo: " + titulo + 
+				"image: " + imagen;
+	}
 }

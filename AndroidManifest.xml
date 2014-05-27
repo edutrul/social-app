@@ -22,10 +22,14 @@
 	       </intent-filter>
 	    </activity>
 	    
-	    <activity
-	       android:name=".ListActividadesActivity"
-	       android:label="APP-SOCIAL|Todas actividades" >
-	    </activity>
+		<activity
+            android:name=".ListActividadesActivity"
+            android:label="APP-SOCIAL|Todas actividades" 
+            android:uiOptions="splitActionBarWhenNarrow" >
+            <meta-data
+                android:name="android.support.UI_OPTIONS"
+                android:value="splitActionBarWhenNarrow" />
+        </activity>
 	    <activity
 	       android:name=".ActividadFullActivity"
 	       android:label="APP-SOCIAL|Contenido Full" >
@@ -38,6 +42,11 @@
 	       android:name=".ActividadListCategory"
 	       android:label="APP-SOCIAL|Categorias Actividades" >
 	    </activity>
+	    <activity
+	       android:name=".ListOrganizacionesActivity"
+	       android:label="APP-SOCIAL|Todas Organizaciones" >
+	    </activity>
+	    
     </application>
 
 </manifest>

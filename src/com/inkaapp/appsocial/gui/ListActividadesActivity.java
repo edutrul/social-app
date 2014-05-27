@@ -18,6 +18,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.EditText;
@@ -42,6 +43,8 @@ public class ListActividadesActivity extends Activity {
 	
 	public final static String ORGANIZACION_UID = "com.inkaap.appsocial.gui.ACTIVIDAD_UID";
 	public final static String ORGANIZACION_NOMBRE = "com.inkaap.appsocial.gui.ORGANIZACION_NOMBRE";
+	public final static String ORGANIZACION_NID = "com.inkaap.appsocial.gui.ORGANIZACION_NID";
+
 	@TargetApi(Build.VERSION_CODES.GINGERBREAD)
 	@SuppressLint("NewApi")
 	@Override
@@ -52,7 +55,10 @@ public class ListActividadesActivity extends Activity {
 		
 		StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
 		StrictMode.setThreadPolicy(policy);
-
+		
+		//Ocultando KeyBoard
+		  this.getWindow().setSoftInputMode(
+		    WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
 		
 		String jsonResponse = "";
 		
@@ -60,6 +66,7 @@ public class ListActividadesActivity extends Activity {
 		String organizacionNombre = getIntent().getStringExtra(ORGANIZACION_NOMBRE);
 		String actividadTID = getIntent().getStringExtra(ACTIVIDAD_TID);
 		String actividadTIDNombre = getIntent().getStringExtra(ACTIVIDAD_TID_NOMBRE);
+		String organizacionNID = getIntent().getStringExtra(ORGANIZACION_NID);
 		
 		filterText = (EditText) findViewById(R.id.search_box);
 
@@ -72,6 +79,8 @@ public class ListActividadesActivity extends Activity {
 		Log.d("debugging", "organizacionNombre:" + organizacionNombre);
 		Log.d("debugging", "actividadTID:" + actividadTID);
 		Log.d("debugging", "actividadTIDNombre:" + actividadTIDNombre);
+		Log.d("debugging", "actividadTIDNombre:" + actividadTIDNombre);
+		
 		if (organizacionUID != null) {
 			setTitle("Organizador: " + organizacionNombre);
 			filterText.setHint("ORGANIZACION: " + organizacionNombre.toUpperCase());
@@ -82,8 +91,11 @@ public class ListActividadesActivity extends Activity {
 			filterText.setHint("CATEGORIA: " + actividadTIDNombre.toUpperCase());
 			jsonResponse = HttpRequest.get(URI + "?tid=" + actividadTID).body();
 		}
-		else {
+		else if (organizacionNID != null) {
 			jsonResponse = HttpRequest.get(URI).body();
+			jsonResponse = HttpRequest.get(URI + "?nidOrganizacion=" + organizacionNID).body();
+			setTitle("Organizador: " + organizacionNombre);
+			filterText.setHint("ORGANIZACION: " + organizacionNombre.toUpperCase());
 		}
 		
 		// MATCH JSON TO BEAN CLASSES.

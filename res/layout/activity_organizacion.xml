@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?><RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent">
+    
+
+    <ImageView 
+        android:id="@+id/organizacionImagen"
+        android:src="@drawable/grupo"
+        android:layout_alignParentLeft="true"
+        android:padding="5px"
+        android:layout_width="128px"
+        android:layout_height="128px"/>
+        
+    <TextView 
+        android:id="@+id/organizacionNombre"
+        android:layout_toRightOf="@id/organizacionImagen"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="15dip"
+        android:text="Nombre" />
+  
+</RelativeLayout>
