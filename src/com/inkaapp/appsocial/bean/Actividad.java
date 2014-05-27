@@ -10,6 +10,7 @@ public class Actividad {
 	@Expose
 	public String uid;
 	@Expose
+	@SerializedName("node_title")
 	private String titulo;
 	@Expose
 	private String imagen;
