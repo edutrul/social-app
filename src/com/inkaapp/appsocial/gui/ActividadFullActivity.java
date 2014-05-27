@@ -1,14 +1,13 @@
 package com.inkaapp.appsocial.gui;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
+import java.lang.reflect.Type;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.List;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.method.LinkMovementMethod;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.View;
@@ -16,14 +15,18 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.inkaapp.appsocial.util.HttpHelper;
-import com.inkaapp.appsocial.util.UtilHelper;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.reflect.TypeToken;
+import com.inkaapp.appsocial.bean.Actividad;
+import com.inkaapp.appsocial.util.HttpRequest;
 import com.squareup.picasso.Picasso;
 
 public class ActividadFullActivity extends Activity {
 	
 	public String organizacionUID;
 	public String organizacionNombre;
+	public List<Actividad> actividades;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -36,45 +39,37 @@ public class ActividadFullActivity extends Activity {
 	
 	public void fillData() {
 		String nid = getIntent().getStringExtra(ListActividadesActivity.ACTIVIDAD_NID);
-		String jsonResponse = HttpHelper.connect(ListActividadesActivity.URI + "?nid=" + nid);
-	    try {
-			JSONArray joArray = new JSONArray(jsonResponse);
-			for (int i = 0; i < joArray.length(); i++) {
-				JSONObject jsonNode = joArray.getJSONObject(i);
-				String imagenURL = jsonNode.optString("imagen");
-				String titulo = jsonNode.optString("node_title");
-				String objetivo = jsonNode.optString("objetivo");
-				String descripcion = jsonNode.optString("descripcion");
-				String fechaInicio = jsonNode.optString("objetivo");
-				String fechaFin = jsonNode.optString("objetivo");
-				organizacionNombre = jsonNode.optString("organizacion");
-			    organizacionUID = jsonNode.optString("uid");
-				String verDetalleURI = jsonNode.optString("ver_detalle");
+		String jsonResponse;
+		jsonResponse = HttpRequest.get(ListActividadesActivity.URI + "?nid=" + nid).body();
+		
+		// MATCH JSON TO BEAN CLASSES.
+		Type listType = new TypeToken<List<Actividad>>(){}.getType();
+		Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
+        actividades = gson.fromJson(jsonResponse, listType);
+						
+				Actividad actividad = actividades.get(0);
+				Picasso.with(getApplicationContext()).load(actividad.getImage())
+				  .into((ImageView) findViewById(R.id.imgImagen));
 				
-				String lugarEncuentroLat = jsonNode.optString("lugar_encuentro_lat");
-				String lugarEncuentroLong = jsonNode.optString("lugar_encuentro_long");
-				String lugarActividadLat = jsonNode.optString("lugar_actividad_lat");
-				String lugarActividadLong = jsonNode.optString("lugar_actividad_long");
+				organizacionUID = actividad.getUid();
+				organizacionNombre = actividad.getOrganizacion().getTitulo();
 				
-				Picasso.with(getApplicationContext()).load(imagenURL).into((ImageView) findViewById(R.id.imgImagen));
-				
-				((TextView) findViewById(R.id.txtNombreActividad)).setText(titulo);
-				((TextView) findViewById(R.id.txtObjetivo)).setText(objetivo);
-				((TextView) findViewById(R.id.txtDescripcion)).setText(descripcion);
-				((TextView) findViewById(R.id.txtFechaInicio)).setText("17 de Mayo 2014");
-				((TextView) findViewById(R.id.txtFechaFin)).setText("18 de Mayo 2014");
-				((TextView) findViewById(R.id.txtOrganizacionNombre)).setText(organizacionNombre);
-				((TextView) findViewById(R.id.txtLinkDetalle)).setText(verDetalleURI);
+				((TextView) findViewById(R.id.txtNombreActividad)).setText(actividad.getTitulo());
+				((TextView) findViewById(R.id.txtObjetivo)).setText(actividad.getObjetivo());
+				((TextView) findViewById(R.id.txtDescripcion)).setText(actividad.getDescripcion());
+				((TextView) findViewById(R.id.txtFechaInicio)).setText(
+						new SimpleDateFormat("yyyy-MM-dd").format(
+								new Date(actividad.getFechaInicio() * 1000)));
+				((TextView) findViewById(R.id.txtFechaFin)).setText(
+						new SimpleDateFormat("yyyy-MM-dd").format(
+								new Date(actividad.getFechaFin() * 1000)));
+				((TextView) findViewById(R.id.txtOrganizacionNombre)).setText(actividad.getOrganizacion().getTitulo());
+				((TextView) findViewById(R.id.txtLinkDetalle)).setText("www.google.com.pe");
 				
 				((TextView) findViewById(R.id.txtNumeroActividadesRealizadas)).setText("2");
 				((TextView) findViewById(R.id.txtPuntuacionPromedio)).setText("4.5");
 				((TextView) findViewById(R.id.txtNumeroActividadesTipo)).setText("2");
 				((TextView) findViewById(R.id.txtPuntuacionPromedioTipo)).setText("1");
-			}
-		} catch (JSONException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 	}
 	
 	public void onClickApoyarActividad(View view) {
