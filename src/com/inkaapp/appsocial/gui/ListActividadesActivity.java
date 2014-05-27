@@ -4,9 +4,13 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
+import android.annotation.SuppressLint;
+import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
+import android.os.StrictMode;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -38,11 +42,18 @@ public class ListActividadesActivity extends Activity {
 	
 	public final static String ORGANIZACION_UID = "com.inkaap.appsocial.gui.ACTIVIDAD_UID";
 	public final static String ORGANIZACION_NOMBRE = "com.inkaap.appsocial.gui.ORGANIZACION_NOMBRE";
+	@TargetApi(Build.VERSION_CODES.GINGERBREAD)
+	@SuppressLint("NewApi")
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_list_actividades);
+		
+		StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+		StrictMode.setThreadPolicy(policy);
+
+		
 		String jsonResponse = "";
 		
 		String organizacionUID = getIntent().getStringExtra(ORGANIZACION_UID);
