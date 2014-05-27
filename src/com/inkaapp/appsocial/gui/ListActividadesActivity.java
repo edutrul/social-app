@@ -9,6 +9,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -36,7 +37,7 @@ public class ListActividadesActivity extends Activity {
 	public final static String ACTIVIDAD_TID_NOMBRE = "com.inkaap.appsocial.gui.ACTIVIDAD_TID_NOMBRE";
 	
 	public final static String ORGANIZACION_UID = "com.inkaap.appsocial.gui.ACTIVIDAD_UID";
-	public final static String ORGANIZACION_NOMBRE = "com.inkaap.appsocial.gui.ACTIVIDAD_NOMBRE";
+	public final static String ORGANIZACION_NOMBRE = "com.inkaap.appsocial.gui.ORGANIZACION_NOMBRE";
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
@@ -56,6 +57,10 @@ public class ListActividadesActivity extends Activity {
 		List<Actividad> actividades =
 		           new ArrayList<Actividad>();
 		
+		Log.d("debugging", "organizacionUID:" + organizacionUID);
+		Log.d("debugging", "organizacionNombre:" + organizacionNombre);
+		Log.d("debugging", "actividadTID:" + actividadTID);
+		Log.d("debugging", "actividadTIDNombre:" + actividadTIDNombre);
 		if (organizacionUID != null) {
 			setTitle("Organizador: " + organizacionNombre);
 			filterText.setHint("ORGANIZACION: " + organizacionNombre.toUpperCase());
@@ -63,12 +68,10 @@ public class ListActividadesActivity extends Activity {
 		}
 		else if (actividadTID != null) {
 			setTitle("CATEGORIA: " + actividadTIDNombre);
-			filterText.setHint("ORGANIZACION: " + actividadTIDNombre.toUpperCase());
+			filterText.setHint("CATEGORIA: " + actividadTIDNombre.toUpperCase());
 			jsonResponse = HttpRequest.get(URI + "?tid=" + actividadTID).body();
 		}
 		else {
-			// TODO: Instead of having a HttpHelp class use the library http://loopj.com/android-async-http/
-			System.out.println("Hola mundo");
 			jsonResponse = HttpRequest.get(URI).body();
 		}
 		

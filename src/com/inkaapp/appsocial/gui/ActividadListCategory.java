@@ -3,6 +3,7 @@ package com.inkaapp.appsocial.gui;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
@@ -13,7 +14,13 @@ import android.widget.Toast;
 public class ActividadListCategory extends Activity {
 	ListView listView = null;
 	static final String[] CATEGORIES = new String[] 
-	  {"Celebración de Fechas especiales", "Donaciones", "Otros"};
+	  {
+		"Celebración de Fechas especiales", 
+	    "Talleres de capacitación", 
+	    "Donaciones",
+	    "Visita de entidades",
+	    "Otros",
+	  };
  
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -47,8 +54,9 @@ public class ActividadListCategory extends Activity {
 			      "Position :"+itemPosition+"  ListItem : " +itemValue , Toast.LENGTH_LONG)
 			      .show();
 			    Intent intent = new Intent(getApplicationContext(), ListActividadesActivity.class);
-			    intent.putExtra(ListActividadesActivity.ACTIVIDAD_TID, itemPosition);
+			    intent.putExtra(ListActividadesActivity.ACTIVIDAD_TID, String.valueOf(itemPosition));
 			    intent.putExtra(ListActividadesActivity.ACTIVIDAD_TID_NOMBRE, itemValue);
+			    Log.d("debugging", "itemPosition: " + itemPosition);
 			    startActivity(intent);
 			  }
 			

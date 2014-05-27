@@ -2,6 +2,7 @@ package com.inkaapp.appsocial.gui;
 
 import java.lang.reflect.Type;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -79,7 +80,16 @@ public class ActividadFullActivity extends Activity {
 		   Toast.makeText(getApplicationContext(),
 		     "UD ESTÁ PARTICIPANDO DE ESTÁ ACTIVIDAD! SU ACTIVIDAD HA SIDO AGENDADO CON ÉXITO. LE NOTIFICAREMOS MEDIANTE UN CORREO :" , Toast.LENGTH_LONG)
 		     .show();
-		
+		   
+		   Calendar cal = Calendar.getInstance();              
+           Intent intent = new Intent(Intent.ACTION_EDIT);
+           intent.setType("vnd.android.cursor.item/event");
+           intent.putExtra("beginTime", cal.getTimeInMillis());
+           intent.putExtra("allDay", true);
+           intent.putExtra("rrule", "FREQ=YEARLY");
+           intent.putExtra("endTime", cal.getTimeInMillis()+60*60*1000);
+           intent.putExtra("title", "A Test Event from android app");
+           startActivity(intent);
 	}
 	
 	public void onClickCompartirRedesSociales(View view) {
