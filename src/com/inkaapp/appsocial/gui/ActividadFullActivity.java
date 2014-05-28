@@ -6,11 +6,14 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
+import android.annotation.SuppressLint;
+import android.annotation.TargetApi;
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.Build;
 import android.os.Bundle;
+import android.os.StrictMode;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.View;
@@ -31,6 +34,8 @@ public class ActividadFullActivity extends Activity {
 	public String organizacionNombre;
 	public List<Actividad> actividades;
 	
+	@TargetApi(Build.VERSION_CODES.GINGERBREAD)
+	@SuppressLint("NewApi")
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
@@ -38,6 +43,11 @@ public class ActividadFullActivity extends Activity {
 		setContentView(R.layout.activity_full_actividad);
 		fillData();
 		
+		if (android.os.Build.VERSION.SDK_INT > 9) {
+			StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder()
+					.permitAll().build();
+			StrictMode.setThreadPolicy(policy);
+		}
 	}
 	
 	public void fillData() {
