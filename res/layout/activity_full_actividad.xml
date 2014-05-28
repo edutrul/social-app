@@ -1,236 +1,319 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="fill_parent"
-    android:layout_height="fill_parent">
+    android:layout_height="fill_parent" >
 
-<LinearLayout 
-    android:layout_width="fill_parent"
-    android:layout_height="wrap_content"
-    android:orientation="vertical">
-    
-    <ImageView 
-        android:id="@+id/imgImagen"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:contentDescription="@string/app_name"
-        android:src="@drawable/grupo"/>
-    <LinearLayout 
+    <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
-        <!--  APOYAR ESTA ACTIVIDAD -->
-    <Button 
+        android:orientation="vertical" >
+
+        <ImageView
+            android:id="@+id/imgImagen"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="APOYO ESTÁ ACTIVIDAD"
-            android:onClick="onClickApoyarActividad"/>
-        <!--  COMPARTIR ESTA ACTIVIDAD -->
-    <Button 
-            android:layout_width="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:contentDescription="@string/app_name"
+            android:src="@drawable/grupo" />
+
+        <LinearLayout
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:text="COMPARTIR REDES SOCIALES"
-            android:onClick="onClickCompartirRedesSociales"/>
-    </LinearLayout>
-    
-    <!-- NOMBRE ACTIVIDAD  -->
-    <LinearLayout 
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-    <TextView 
-            android:text="Nombre: "
-            android:textColor="#f7d80c"
-        	android:layout_width="wrap_content"
-        	android:layout_height="wrap_content"/>
-    <TextView 
-            android:id="@+id/txtNombreActividad"
-        	android:layout_width="wrap_content"
-        	android:layout_height="wrap_content"/>
-    
-    </LinearLayout>
-    
-    <!-- OBJETIVO  -->
-    <LinearLayout 
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-    <TextView 
-            android:text="Objetivo: "
-            android:textColor="#f7d80c"
-        	android:layout_width="wrap_content"
-        	android:layout_height="wrap_content"/>
-    <TextView 
-            android:id="@+id/txtObjetivo"
-        	android:layout_width="wrap_content"
-        	android:layout_height="wrap_content"/>
-    </LinearLayout>
-    
-    <!-- DESCRIPCIÓN  -->
-    <LinearLayout 
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-    <TextView 
-            android:text="Descripción: "
-            android:textColor="#f7d80c"
-        	android:layout_width="wrap_content"
-        	android:layout_height="wrap_content"/>
-    <TextView 
-            android:id="@+id/txtDescripcion"
-        	android:layout_width="wrap_content"
-        	android:layout_height="wrap_content"/>
-    </LinearLayout>
-    
-    <!-- CRONOGRAMA: FECHA-INICIO  -->
-    <LinearLayout 
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-    <TextView 
-            android:text="Fecha Inicio: "
-            android:textColor="#f7d80c"
-        	android:layout_width="wrap_content"
-        	android:layout_height="wrap_content"/>
-    <TextView 
-            android:id="@+id/txtFechaInicio"
-        	android:layout_width="wrap_content"
-        	android:layout_height="wrap_content"/>
-    </LinearLayout>
-    
-    <!-- CRONOGRAMA: FECHA-FIN  -->
-    <LinearLayout 
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-    <TextView 
-            android:text="Fecha Fin: "
-            android:textColor="#f7d80c"
-        	android:layout_width="wrap_content"
-        	android:layout_height="wrap_content"/>
-    <TextView 
-            android:id="@+id/txtFechaFin"
-        	android:layout_width="wrap_content"
-        	android:layout_height="wrap_content"/>
-    </LinearLayout>
-  
-    <!-- NOMBRE ENTIDAD ORGANIZADORA  -->
-    <LinearLayout 
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-    <TextView 
-            android:text="ORGANIZADO POR: "
-            android:textColor="#f7d80c"
-        	android:layout_width="wrap_content"
-        	android:layout_height="wrap_content"/>
-    <TextView 
-            android:id="@+id/txtOrganizacionNombre"
-        	android:layout_width="wrap_content"
-        	android:layout_height="wrap_content"/>
-    <Button 
+            android:orientation="vertical" >
+
+            <!-- APOYAR ESTA ACTIVIDAD -->
+
+            <Button
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/botones_style"
+                android:onClick="onClickApoyarActividad"
+                android:text="+Apoyar"
+                android:textColor="#FFFFFF"
+                android:textStyle="bold|italic" />
+            <!-- COMPARTIR ESTA ACTIVIDAD -->
+
+            <Button
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/botones_style"
+                android:onClick="onClickCompartirRedesSociales"
+                android:text="+Compartir"
+                android:textColor="#FFFFFF"
+                android:textStyle="bold|italic" />
+            <Button
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/botones_style"
+                android:onClick="onClickGuardarBusqueda"
+                android:text="GUARDAR BUSQUEDA"
+                android:textColor="#FFFFFF"
+                android:textStyle="bold|italic" />
+        </LinearLayout>
+
+        <!-- NOMBRE ACTIVIDAD -->
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Nombre: "
+                android:textColor="#f7d80c" />
+
+            <TextView
+                android:id="@+id/txtNombreActividad"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+        <!-- CATEGORIA ACTIVIDAD -->
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Categoria: "
+                android:textColor="#f7d80c" />
+
+            <TextView
+                android:id="@+id/txtCategoria"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
+        <!-- OBJETIVO -->
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Objetivo: "
+                android:textColor="#f7d80c" />
+
+            <TextView
+                android:id="@+id/txtObjetivo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
+        <!-- DESCRIPCIÓN -->
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Descripción: "
+                android:textColor="#f7d80c" />
+
+            <TextView
+                android:id="@+id/txtDescripcion"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
+        <!-- CRONOGRAMA: FECHA-INICIO -->
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Fecha Inicio: "
+                android:textColor="#f7d80c" />
+
+            <TextView
+                android:id="@+id/txtFechaInicio"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
+        <!-- CRONOGRAMA: FECHA-FIN -->
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Fecha Fin: "
+                android:textColor="#f7d80c" />
+
+            <TextView
+                android:id="@+id/txtFechaFin"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
+        <!-- NOMBRE ENTIDAD ORGANIZADORA -->
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="ORGANIZADO POR: "
+                android:textColor="#f7d80c" />
+
+            <TextView
+                android:id="@+id/txtOrganizacionNombre"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
+        <Button
             android:id="@+id/btnMasActividades"
-            android:layout_width="wrap_content"
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:text="+ ACTIVIDADES"
-            android:onClick="onClickMasActividades"/>
-    </LinearLayout>
-    
-    <!-- VER MÁS DETALLE DEL EVENTO: -->
-    <LinearLayout 
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-    <TextView 
-            android:text="Link otros detalles: "
-            android:textColor="#f7d80c"
-        	android:layout_width="wrap_content"
-        	android:layout_height="wrap_content"/>
-    <TextView 
-            android:id="@+id/txtLinkDetalle"
-            android:autoLink="web"
-        	android:layout_width="wrap_content"
-        	android:layout_height="wrap_content"/>
-    </LinearLayout>
-    
-    <!--  __________REPORTES______ -->
-    
-    <!-- NRO actividades realizadas -->
-    <LinearLayout 
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-    <TextView 
-            android:text="N° Actividades realizadas "
-            android:textColor="#f7d80c"
-        	android:layout_width="wrap_content"
-        	android:layout_height="wrap_content"/>
-    <TextView 
-            android:id="@+id/txtNumeroActividadesRealizadas"
-        	android:layout_width="wrap_content"
-        	android:layout_height="wrap_content"/>
-    </LinearLayout>
-    
-    <!-- puntuación promedio -->
-    <LinearLayout 
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-    <TextView 
-            android:text="Puntuación Promedio: "
-            android:textColor="#f7d80c"
-        	android:layout_width="wrap_content"
-        	android:layout_height="wrap_content"/>
-    <TextView 
-            android:id="@+id/txtPuntuacionPromedio"
-        	android:layout_width="wrap_content"
-        	android:layout_height="wrap_content"/>
-    </LinearLayout>
-    
-    <!-- nro actividades este tipo -->
-    <LinearLayout 
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-    <TextView 
-            android:text="Número Actividades Tipo: "
-            android:textColor="#f7d80c"
-        	android:layout_width="wrap_content"
-        	android:layout_height="wrap_content"/>
-    <TextView 
-            android:id="@+id/txtNumeroActividadesTipo"
-        	android:layout_width="wrap_content"
-        	android:layout_height="wrap_content"/>
-    </LinearLayout>
-    
-    <!-- Puntuación promedio de este tipo -->
-    <LinearLayout 
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-    <TextView 
-            android:text="Puntuación promedio de este tipo: "
-            android:textColor="#f7d80c"
-        	android:layout_width="wrap_content"
-        	android:layout_height="wrap_content"/>
-    <TextView 
-            android:id="@+id/txtPuntuacionPromedioTipo"
-        	android:layout_width="wrap_content"
-        	android:layout_height="wrap_content"/>
-    </LinearLayout>
-    
-<!--     <fragment -->
-<!--         android:id="@+id/mapLugarEncuentro" -->
-<!--         android:name="com.google.android.gms.maps.MapFragment" -->
-<!--         android:layout_width="fill_parent" -->
-<!--         android:layout_height="300dp" /> -->
-<!--     <fragment -->
-<!--         android:id="@+id/mapLugarActividad" -->
-<!--         android:name="com.google.android.gms.maps.MapFragment" -->
-<!--         android:layout_width="fill_parent" -->
-<!--         android:layout_height="300dp" /> -->
-    
-    
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/botones_style"
+            android:onClick="onClickMasActividades"
+            android:text="+Actividades"
+            android:textColor="#FFFFFF"
+            android:textStyle="bold|italic" />
+        <!-- VER MÁS DETALLE DEL EVENTO: -->
 
-    
-</LinearLayout>
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Link otros detalles: "
+                android:textColor="#f7d80c" />
+
+            <TextView
+                android:id="@+id/txtLinkDetalle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:autoLink="web" />
+        </LinearLayout>
+
+        <!-- __________REPORTES______ -->
+
+
+        <!-- NRO actividades realizadas -->
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="N° Actividades realizadas "
+                android:textColor="#f7d80c" />
+
+            <TextView
+                android:id="@+id/txtNumeroActividadesRealizadas"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
+        <!-- puntuación promedio -->
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Puntuación Promedio: "
+                android:textColor="#f7d80c" />
+
+            <TextView
+                android:id="@+id/txtPuntuacionPromedio"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
+        <!-- nro actividades este tipo -->
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Número Actividades Tipo: "
+                android:textColor="#f7d80c" />
+
+            <TextView
+                android:id="@+id/txtNumeroActividadesTipo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
+        <!-- Puntuación promedio de este tipo -->
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Puntuación promedio de este tipo: "
+                android:textColor="#f7d80c" />
+
+            <TextView
+                android:id="@+id/txtPuntuacionPromedioTipo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
+        <!-- <fragment -->
+        <!-- android:id="@+id/mapLugarEncuentro" -->
+        <!-- android:name="com.google.android.gms.maps.MapFragment" -->
+        <!-- android:layout_width="fill_parent" -->
+        <!-- android:layout_height="300dp" /> -->
+        <!-- <fragment -->
+        <!-- android:id="@+id/mapLugarActividad" -->
+        <!-- android:name="com.google.android.gms.maps.MapFragment" -->
+        <!-- android:layout_width="fill_parent" -->
+        <!-- android:layout_height="300dp" /> -->
+
+    </LinearLayout>
+
 </ScrollView>

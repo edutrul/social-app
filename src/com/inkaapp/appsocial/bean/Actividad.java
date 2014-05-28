@@ -35,6 +35,12 @@ public class Actividad {
 	private long fechaFin;
 	@Expose
 	private Organizacion organizacion;
+	@Expose
+	private String categoria;
+	@Expose
+	@SerializedName("taxonomy_term_data_field_data_field_categoria_tid")
+	private String categoriaTid;
+	
 	
 	public Actividad() {
 		super();
@@ -43,7 +49,8 @@ public class Actividad {
 	public Actividad(String nid, String uid, String titulo, String image, String descripcion,
 			String objetivo, double lugarEncuentroLat,
 			double lugarEncuentrolong, double lugarActividadLat,
-			double lugarActividadlong, long fechaInicio, long fechaFin, Organizacion organizacion) {
+			double lugarActividadlong, long fechaInicio, long fechaFin, Organizacion organizacion, 
+			String categoria, String categoriaTid) {
 		super();
 		this.nid = nid;
 		this.uid = uid;
@@ -58,6 +65,8 @@ public class Actividad {
 		this.fechaInicio = fechaInicio;
 		this.fechaFin = fechaFin;
 		this.organizacion = organizacion;
+		this.categoria = categoria;
+		this.categoriaTid = categoriaTid;
 	}
 	
 	public void setNid(String nid) {
@@ -165,6 +174,22 @@ public class Actividad {
 		this.organizacion = organizacion;
 	}
 	
+	public String getCategoria() {
+		return categoria;
+	}
+
+	public void setCategoria(String categoria) {
+		this.categoria = categoria;
+	}
+	
+	public String getCategoriaTid() {
+		return categoriaTid;
+	}
+
+	public void setCategoriaTid(String categoriaTid) {
+		this.categoriaTid = categoriaTid;
+	}
+
 	@Override
 	public String toString() {
 		// TODO Auto-generated method stub
@@ -180,6 +205,8 @@ public class Actividad {
 				"lugarEncuentrolong: " + lugarEncuentrolong +
 				"fechaInicio: " + fechaInicio +
 				"fechaFin: " + fechaFin +
+				"categoria: " + categoria +
+				"categoriaTid: " + categoriaTid +
 		        "organizacion.getTitulo(): " + organizacion.getTitulo() +
 		        "organizacion.getDescripcion(): " + organizacion.getDescripcion();
 	}

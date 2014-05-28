@@ -2,20 +2,24 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:orientation="vertical"
-    android:gravity="center_vertical">
+    android:background="@color/celeste"
+    android:gravity="center_vertical"
+    android:orientation="vertical" >
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="368dp"
+        android:contentDescription="@string/app_name"
+        android:src="@drawable/community" />
 
     <TextView
         android:id="@+id/textView1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="              ACTIVIDAD SOCIAL"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
-
-	<ImageView
-	    android:layout_width="match_parent"
-	    android:layout_height="wrap_content"
-	    android:contentDescription="@string/app_name"
-	    android:src="@drawable/icono_actividad_social" />
+        android:text="+Apptividad Social" 
+        android:textStyle="bold|italic"
+        android:textColor="#FFFFFF"
+        android:layout_gravity="center_horizontal"
+        android:textSize="25dp"/>
 
 </LinearLayout>

@@ -7,7 +7,9 @@ import java.util.Date;
 import java.util.List;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -66,6 +68,7 @@ public class ActividadFullActivity extends Activity {
 								new Date(actividad.getFechaFin() * 1000)));
 				((TextView) findViewById(R.id.txtOrganizacionNombre)).setText(actividad.getOrganizacion().getTitulo());
 				((TextView) findViewById(R.id.txtLinkDetalle)).setText("www.google.com.pe");
+				((TextView) findViewById(R.id.txtCategoria)).setText(actividad.getCategoria());
 				
 				((TextView) findViewById(R.id.txtNumeroActividadesRealizadas)).setText("2");
 				((TextView) findViewById(R.id.txtPuntuacionPromedio)).setText("4.5");
@@ -107,6 +110,13 @@ public class ActividadFullActivity extends Activity {
 		intent.putExtra(ListActividadesActivity.ORGANIZACION_UID, organizacionUID);
 		intent.putExtra(ListActividadesActivity.ORGANIZACION_NOMBRE, organizacionNombre);
 		startActivity(intent);
+	}
+	
+	public void onClickGuardarBusqueda(View view) {
+		SharedPreferences sharedPreferences = getSharedPreferences(
+				"MY_SHARED_PREF", MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+//        editor.putString(, "");
 	}
 	
 	public boolean onCreateOptionsMenu(Menu menu) {
