@@ -9,6 +9,7 @@ import java.util.List;
 import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Build;
@@ -33,6 +34,8 @@ public class ActividadFullActivity extends Activity {
 	public String organizacionUID;
 	public String organizacionNombre;
 	public List<Actividad> actividades;
+	public String actividadTid;
+	public String actividadCategoria;
 	
 	@TargetApi(Build.VERSION_CODES.GINGERBREAD)
 	@SuppressLint("NewApi")
@@ -61,6 +64,8 @@ public class ActividadFullActivity extends Activity {
         actividades = gson.fromJson(jsonResponse, listType);
 						
 				Actividad actividad = actividades.get(0);
+				actividadTid = actividad.getCategoriaTid();
+				actividadCategoria = actividad.getCategoria();
 				Picasso.with(getApplicationContext()).load(actividad.getImage())
 				  .into((ImageView) findViewById(R.id.imgImagen));
 				
@@ -123,10 +128,9 @@ public class ActividadFullActivity extends Activity {
 	}
 	
 	public void onClickGuardarBusqueda(View view) {
-		SharedPreferences sharedPreferences = getSharedPreferences(
-				"MY_SHARED_PREF", MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-//        editor.putString(, "");
+		SharedPreferences sharedPref = getPreferences(Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPref.edit();
+        editor.putString(actividadTid, actividadCategoria);
 	}
 	
 	public boolean onCreateOptionsMenu(Menu menu) {

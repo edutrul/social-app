@@ -1,7 +1,13 @@
 package com.inkaapp.appsocial.gui;
  
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
+
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -21,18 +27,55 @@ public class ActividadListCategory extends Activity {
 	    "Visita de entidades",
 	    "Otros",
 	  };
+	
+	HashMap<String,String> items =
+	        new HashMap<String,String>();
+	HashMap<String,String> itemsFound =
+	        new HashMap<String,String>();
  
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_list_category);
 		
+		
+		
+		items.put("6", "Celebración de Fechas especiales");
+		items.put("7", "Talleres de capacitación");
+		items.put("8", "Donaciones");
+		items.put("9", "Visita de entidades");
+		items.put("10", "Otros");
+
+		SharedPreferences sharedPref = getPreferences(Context.MODE_PRIVATE);
+//		
+//		 for (Entry<String, String> entry : items.entrySet()) {
+//
+//             String savedPref = sharedPreferences.getString(entry.getKey(), "");
+//             itemsFound.put(savedPref, entry.getKey());
+//             Log.d("debugging", savedPref);
+//             Log.d("debugging", savedPref);
+//             Toast.makeText(getApplicationContext(), savedPref, Toast.LENGTH_LONG).show();
+//
+//         }
+		 
+		    Iterator it = items.entrySet().iterator();
+		    while (it.hasNext()) {
+		        Map.Entry pairs = (Map.Entry)it.next();
+		        Log.d("debugging", pairs.getKey() + " = " + pairs.getValue());
+		        it.remove(); // avoids a ConcurrentModificationException
+	            String savedPref = sharedPref.getString(pairs.getKey().toString(), "");
+	            Log.d("debugging", savedPref);
+//	            itemsFound.put(savedPref, pairs.getKey().toString());
+		    }
+		 
+		
 		//Find ListView in the layout.
 		listView = (ListView) findViewById(R.id.list);
 		
-
-		ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
-		  android.R.layout.simple_list_item_1, android.R.id.text1, CATEGORIES);
+		
+		ArrayAdapter<String> adapter =
+		        new ArrayAdapter<String>(this,
+		            android.R.layout.simple_list_item_1, CATEGORIES);
 
 
 		// Assign adapter to ListView
