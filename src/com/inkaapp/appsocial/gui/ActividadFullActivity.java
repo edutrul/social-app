@@ -12,9 +12,12 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.SharedPreferences.Editor;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.StrictMode;
+import android.preference.PreferenceManager;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.View;
@@ -128,9 +131,20 @@ public class ActividadFullActivity extends Activity {
 	}
 	
 	public void onClickGuardarBusqueda(View view) {
-		SharedPreferences sharedPref = getPreferences(Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPref.edit();
+		
+		
+		SharedPreferences sp = PreferenceManager
+				.getDefaultSharedPreferences(this);
+		
+        SharedPreferences.Editor editor = sp.edit();
         editor.putString(actividadTid, actividadCategoria);
+        editor.commit();
+        
+		   // Show Alert 
+		   Toast.makeText(getApplicationContext(),
+		     "SU BÚSQUEDA HA SIDO GUARDADA! Click en opciones del menú y click en ver MIS BUSQUEDAS:" , Toast.LENGTH_LONG)
+		     .show();
+        
 	}
 	
 	public boolean onCreateOptionsMenu(Menu menu) {

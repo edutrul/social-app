@@ -178,6 +178,11 @@ public class ListActividadesActivity extends Activity {
     		startActivity(new Intent(this, ListActividadesActivity.class));
     		return true;
     	case R.id.itemBusquedaCategorias:
+    		Intent intent = new Intent(this, ActividadListCategory.class);
+    		intent.putExtra("all-categories", "all-categories");
+    		startActivity(intent);
+    		return true;
+    	case R.id.itemMisBusquedas:
     		startActivity(new Intent(this, ActividadListCategory.class));
     		return true;
     	default:
